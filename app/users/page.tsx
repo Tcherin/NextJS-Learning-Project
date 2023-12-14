@@ -1,7 +1,25 @@
-import React from "react";
+import Link from "next/link";
+import UserTable from "./UserTable";
+import { Suspense } from "react";
 
-const UsersPage = () => {
-  return <div>UsersPage</div>;
+interface Props {
+  searchParams: { sortOrder: string };
+}
+
+const UsersPage = ({ searchParams: { sortOrder } }: Props) => {
+  return (
+    <>
+      <h1>Users</h1>
+      <Link href="/users/new" className="btn">
+        New User
+      </Link>
+      <Suspense
+        fallback={<span className="loading loading-spinner loading-md"></span>}
+      >
+        <UserTable sortOrder={sortOrder} />
+      </Suspense>
+    </>
+  );
 };
 
 export default UsersPage;
